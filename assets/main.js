@@ -32,6 +32,20 @@ var PRICING={
     });
   });
   apply(PRICING[saved]?saved:detect());
+  // Refine with the visitor's IP country (Cloudflare's free trace endpoint). Skipped if the visitor chose a currency.
+  if(!PRICING[saved]&&window.fetch){
+    var ctl=window.AbortController?new AbortController():null;
+    var t=setTimeout(function(){if(ctl)ctl.abort()},2500);
+    fetch('https://www.cloudflare.com/cdn-cgi/trace',{signal:ctl?ctl.signal:undefined})
+      .then(function(r){return r.text()})
+      .then(function(txt){
+        clearTimeout(t);
+        var m=/^loc=([A-Z]{2})$/m.exec(txt);
+        var chosen=null;try{chosen=localStorage.getItem('gd-currency')}catch(e){}
+        if(m&&!PRICING[chosen])apply(m[1]==='IN'?'INR':'USD');
+      })
+      .catch(function(){});
+  }
 })();
 (function(){
   var desks=[
