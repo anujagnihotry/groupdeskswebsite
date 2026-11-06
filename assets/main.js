@@ -1,3 +1,38 @@
+
+// ---- Pricing config: edit prices here. Monthly amounts per plan. ----
+var PRICING={
+  INR:{symbol:'₹',locale:'en-IN',starter:1799,growth:1999},
+  USD:{symbol:'$',locale:'en-US',starter:20,growth:25}
+};
+(function(){
+  // India is detected from the browser time zone (no IP lookup, no tracking).
+  function detect(){
+    try{
+      var tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'';
+      if(tz==='Asia/Kolkata'||tz==='Asia/Calcutta')return 'INR';
+    }catch(e){}
+    return 'USD';
+  }
+  var saved=null;
+  try{saved=localStorage.getItem('gd-currency')}catch(e){}
+  function apply(cur){
+    var c=PRICING[cur];
+    document.querySelectorAll('[data-price]').forEach(function(el){
+      el.textContent=c.symbol+c[el.getAttribute('data-price')].toLocaleString(c.locale);
+    });
+    document.querySelectorAll('.cur button').forEach(function(b){
+      b.setAttribute('aria-pressed',b.getAttribute('data-cur')===cur?'true':'false');
+    });
+  }
+  document.querySelectorAll('.cur button').forEach(function(b){
+    b.addEventListener('click',function(){
+      var cur=b.getAttribute('data-cur');
+      try{localStorage.setItem('gd-currency',cur)}catch(e){}
+      apply(cur);
+    });
+  });
+  apply(PRICING[saved]?saved:detect());
+})();
 (function(){
   var desks=[
     {id:'sales',label:'Sales',bg:'var(--sales-bg)',fg:'var(--sales-fg)',dot:'#FFC93C',who:'For sales teams and distributors',head:'Never lose an order inside a dealer group.',body:'Dealer and customer groups land in one Sales view. Assign each chat to a salesperson, see who replied last, and pick up the conversation even when the original rep is on leave.',points:['Assign chats and groups to a salesperson in one click','Quick replies for rate lists, catalogues and payment details','See every open enquiry across all reps on one screen','Hand over a customer with the full chat history']},

@@ -201,3 +201,8 @@ details p{padding:0 0 20px;color:var(--slate);max-width:62ch}
 
 footer{background:var(--ice);border-top:1px solid var(--line)}
 footer .wrap{padding-block:36px 48px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;font-size:14px;color:var(--muted)}
+
+.plan .price b{font-weight:800}
+.cur{display:inline-flex;gap:4px;padding:4px;margin-bottom:20px;background:var(--ice);border:1px solid var(--line);border-radius:12px}
+.cur button{font:700 14px var(--body);min-height:40px;padding:0 16px;border:0;border-radius:9px;background:transparent;color:var(--slate);cursor:pointer}
+.cur button[aria-pressed="true"]{background:var(--azure);color:var(--white)}
