@@ -72,9 +72,9 @@ function notifyEmail(d) {
   const rows = [['Name', d.name], ['Email', d.email], ['WhatsApp', d.phone], ['Business', d.company || '-'], ['Team size', d.size || '-']];
   return {
     from: FROM, to: [NOTIFY], reply_to: d.email,
-    subject: 'New early-access request: ' + d.name,
+    subject: 'New enquiry from the website: ' + d.name,
     text: rows.map(r => r[0] + ': ' + r[1]).join('\n'),
-    html: '<h2 style="font-family:Arial,sans-serif;color:#0E2A47">New early-access request</h2><table style="font-family:Arial,sans-serif;font-size:15px;color:#0E2A47;border-collapse:collapse">' +
+    html: '<h2 style="font-family:Arial,sans-serif;color:#0E2A47">New enquiry from the website</h2><table style="font-family:Arial,sans-serif;font-size:15px;color:#0E2A47;border-collapse:collapse">' +
       rows.map(r => '<tr><td style="padding:6px 16px 6px 0;color:#48607A">' + r[0] + '</td><td style="padding:6px 0"><b>' + esc(r[1]) + '</b></td></tr>').join('') + '</table>'
   };
 }
@@ -83,12 +83,12 @@ function ackEmail(d) {
   const first = d.name.split(' ')[0];
   return {
     from: FROM, to: [d.email], reply_to: NOTIFY,
-    subject: 'Thanks for your interest in GroupDesks',
-    text: 'Hi ' + first + ',\n\nThanks for requesting early access to GroupDesks. We have received your details and will message you on WhatsApp (' + d.phone + ') before launch to set up your desks.\n\nIf you want to add anything, just reply to this email.\n\nTeam GroupDesks\nhttps://www.groupdesks.com',
+    subject: 'Thanks for contacting GroupDesks',
+    text: 'Hi ' + first + ',\n\nThanks for getting in touch with GroupDesks. We have received your details and will message you on WhatsApp (' + d.phone + ') shortly to set up your desks.\n\nIf you want to add anything, just reply to this email.\n\nTeam GroupDesks\nhttps://www.groupdesks.com',
     html: '<div style="font-family:Arial,sans-serif;font-size:16px;line-height:1.6;color:#0E2A47;max-width:520px">' +
       '<p style="font-size:22px;font-weight:700;margin:0 0 16px">Group<span style="color:#1468C8">Desks</span></p>' +
       '<p>Hi ' + esc(first) + ',</p>' +
-      '<p>Thanks for requesting early access to GroupDesks. We have received your details and will message you on WhatsApp (<b>' + esc(d.phone) + '</b>) before launch to set up your desks.</p>' +
+      '<p>Thanks for getting in touch with GroupDesks. We have received your details and will message you on WhatsApp (<b>' + esc(d.phone) + '</b>) shortly to set up your desks.</p>' +
       '<p>If you want to add anything, just reply to this email.</p>' +
       '<p style="color:#48607A">Team GroupDesks<br><a href="https://www.groupdesks.com" style="color:#1468C8">www.groupdesks.com</a></p></div>'
   };

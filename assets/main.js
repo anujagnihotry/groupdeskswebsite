@@ -111,6 +111,6 @@ var PRICING={
       fail(res.status===429?'Too many requests. Please try again in a while or message us on WhatsApp.':res.status===400?ERR_DEFAULT:'Something went wrong. Please try again or message us on WhatsApp.');
     })
     .catch(function(){fail('Could not send. Check your connection or message us on WhatsApp.')})
-    .then(function(){submitBtn.disabled=false;submitBtn.textContent='Request early access'});
+    .then(function(){submitBtn.disabled=false;submitBtn.textContent='Get started'});
   });
 })();

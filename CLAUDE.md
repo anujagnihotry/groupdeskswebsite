@@ -7,7 +7,7 @@ GroupDesks is a shared team inbox for business WhatsApp numbers and WhatsApp gro
 - Static pages (`index.html`, `privacy.html`, `terms.html`, `assets/`) served by `server.js` (dependency-free Node). It also handles `POST /api/early-access`: emails info@groupdesks.com and an acknowledgement to the visitor through Resend. Deployed on Railway via Dockerfile.
 - Railway env vars: `RESEND_API_KEY` (required), optional `FROM_EMAIL`, `NOTIFY_EMAIL`. Run locally: `node server.js`.
 - Pricing: region-based (INR 1,799 / 1,999 in India, USD 20 / 25 elsewhere), config at top of `assets/main.js`; detected by IP country (Cloudflare trace) with time-zone fallback.
-- Pre-launch: do not present the product as live (no "live" wording; pricing is "launch pricing").
+- Tone: write like a normal production site. No "launching soon", "early access", "before launch" or "waitlist" wording anywhere (page, emails, legal).
 - Sections: header, hero with inbox mock, problems, use-case tabs, features, 3 steps, "same number, many places", pricing, FAQ, early access (form + WhatsApp chat CTA), footer.
 - English only. No dark mode by design.
 
@@ -23,7 +23,7 @@ GroupDesks is a shared team inbox for business WhatsApp numbers and WhatsApp gro
 - No invented stats, customer logos or testimonials.
 
 ## Placeholders
-All filled (WhatsApp +91 99287 94299, email info@groupdesks.com, plan limits as "Multiple users"). Privacy and Terms pages are still placeholders awaiting real text.
+All filled (WhatsApp +91 99287 94299, email info@groupdesks.com, plan limits as "Multiple users"). Privacy and Terms pages contain basic drafts; have them legally reviewed.
 
 ## Open TODOs
 - Confirm product claims: "link your existing number", Android + iOS apps.
