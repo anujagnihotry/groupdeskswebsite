@@ -127,8 +127,8 @@
 
   <section class="steps band-ice" aria-labelledby="steps-h">
     <div class="wrap">
-      <span class="eyebrow">Getting started</span>
-      <h2 class="h2" id="steps-h" style="margin-top:12px">Live in three steps.</h2>
+      <span class="eyebrow">How it will work</span>
+      <h2 class="h2" id="steps-h" style="margin-top:12px">Up and running in three steps.</h2>
       <ol>
         <li><h3>Link your number</h3><p>Connect your existing business WhatsApp number. Your chats and groups appear in GroupDesks.</p></li>
         <li><h3>Set up your desks</h3><p>Create desks like Sales, Support or Dispatch, invite teammates, and route chats and groups to the right desk.</p></li>
@@ -142,7 +142,7 @@
       <div class="card">
         <div>
           <h2 id="any-h">Same number. Many places. One conversation.</h2>
-          <p>The owner is at the office, the dispatch lead is at the godown, the salesperson is with a dealer. All three see the same live chat, know who is replying, and never send two different answers.</p>
+          <p>The owner is at the office, the dispatch lead is at the godown, the salesperson is with a dealer. All three see the same chat in real time, know who is replying, and never send two different answers.</p>
           <div class="chips"><span>Web app</span><span>Android app</span><span>iOS app</span></div>
         </div>
         <div class="places" aria-hidden="true">
@@ -157,16 +157,17 @@
   <section class="pricing" id="pricing">
     <div class="wrap">
       <div class="head">
-        <span class="eyebrow">Pricing</span>
+        <span class="eyebrow">Launch pricing</span>
         <h2 class="h2">Simple plans, priced per number.</h2>
+        <p class="lede">Early-access teams get launch pricing. Plans open when we launch.</p>
       </div>
       <div class="cur" role="group" aria-label="Currency">
         <button type="button" data-cur="INR" aria-pressed="true">₹ INR</button>
         <button type="button" data-cur="USD" aria-pressed="false">$ USD</button>
       </div>
       <div class="plans">
-        <div class="plan"><div class="ptop">Starter</div><div class="price"><b data-price="starter">₹1,799</b><span> /month</span></div><p>For small shops and distributors getting the team off one phone.</p><ul><li>1 WhatsApp number</li><li>Up to [N] team members</li><li>Shared inbox and groups</li><li>Web and mobile app</li></ul><a class="btn btn-outline" href="#early">Join the list</a></div>
-        <div class="plan feat-plan"><div class="ptop">Growth <span class="pill">Most teams</span></div><div class="price"><b data-price="growth">₹1,999</b><span> /month</span></div><p>For businesses running sales, support and dispatch desks together.</p><ul><li>Up to [N] WhatsApp numbers</li><li>Unlimited desks</li><li>Assignment, notes and quick replies</li><li>Reports by desk and teammate</li></ul><a class="btn btn-sunny" href="#early">Join the list</a></div>
+        <div class="plan"><div class="ptop">Starter</div><div class="price"><b data-price="starter">₹1,799</b><span> /month</span></div><p>For small shops and distributors getting the team off one phone.</p><ul><li>1 WhatsApp number</li><li>Multiple users</li><li>Shared inbox and groups</li><li>Web and mobile app</li></ul><a class="btn btn-outline" href="#early">Join the list</a></div>
+        <div class="plan feat-plan"><div class="ptop">Growth <span class="pill">Most teams</span></div><div class="price"><b data-price="growth">₹1,999</b><span> /month</span></div><p>For businesses running sales, support and dispatch desks together.</p><ul><li>Multiple users and WhatsApp numbers</li><li>Unlimited desks</li><li>Assignment, notes and quick replies</li><li>Reports by desk and teammate</li></ul><a class="btn btn-sunny" href="#early">Join the list</a></div>
         <div class="plan"><div class="ptop">Enterprise</div><div class="price">Let’s talk</div><p>For multi-branch teams that need many numbers, roles and integrations.</p><ul><li>Many numbers and branches</li><li>Roles and permissions</li><li>API and CRM integrations</li><li>Priority onboarding</li></ul><a class="btn btn-outline" href="#early">Talk to us</a></div>
       </div>
     </div>
@@ -210,14 +211,16 @@
             <label for="f-name">Your name<input id="f-name" name="fullname" type="text" autocomplete="name" required></label>
             <label for="f-phone">WhatsApp number<input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+91 98xxx xxxxx" required></label>
           </div>
+          <label for="f-email">Email<input id="f-email" name="email" type="email" autocomplete="email" required></label>
           <label for="f-company">Business name<input id="f-company" name="company" type="text" autocomplete="organization"></label>
           <label for="f-size">Team size<select id="f-size" name="size"><option>2–5 people</option><option>6–20 people</option><option>21–50 people</option><option>50+ people</option></select></label>
-          <p class="err" id="f-err" hidden>Add your name and a WhatsApp number with at least 10 digits.</p>
+          <p class="err" id="f-err" hidden>Add your name, a valid email and a WhatsApp number with at least 10 digits.</p>
+          <input type="text" name="website" id="f-hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
           <button class="btn btn-sunny" type="submit">Request early access</button>
         </form>
         <div class="form thanks" id="thanks" hidden>
           <h3>You’re on the list.</h3>
-          <p>We’ll message you on WhatsApp before launch to set up your desks.</p>
+          <p>We’ve emailed you a confirmation and will message you on WhatsApp before launch to set up your desks.</p>
         </div>
       </div>
     </div>
@@ -228,7 +231,7 @@
   <div class="wrap">
     <span class="logo" style="font-size:18px">Group<span class="d">Desks</span></span>
     <span>WhatsApp is a trademark of its owner. GroupDesks is an independent product.</span>
-    <span><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · Contact: [EMAIL]</span>
+    <span><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · Contact: <a href="mailto:info@groupdesks.com">info@groupdesks.com</a></span>
   </div>
 </footer>
 

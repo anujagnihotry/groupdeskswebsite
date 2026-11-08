@@ -4,7 +4,10 @@
 GroupDesks is a shared team inbox for business WhatsApp numbers and WhatsApp groups. Teams split work into "desks" (Sales, Support, Dispatch & ops, Accounts, Owners, Communities) that all work the same chats. Key points: keep your existing number, many people logged in to one number at once from different places, web + Android + iOS apps, assignment, internal notes, group management at scale. Market: India first, broad audience (traders/distributors, growing teams, multi-branch companies).
 
 ## Current state
-- `index.html` is a single self-contained static page (HTML + CSS + vanilla JS, no build step). Open it in a browser to preview.
+- Static pages (`index.html`, `privacy.html`, `terms.html`, `assets/`) served by `server.js` (dependency-free Node). It also handles `POST /api/early-access`: emails info@groupdesks.com and an acknowledgement to the visitor through Resend. Deployed on Railway via Dockerfile.
+- Railway env vars: `RESEND_API_KEY` (required), optional `FROM_EMAIL`, `NOTIFY_EMAIL`. Run locally: `node server.js`.
+- Pricing: region-based (INR 1,799 / 1,999 in India, USD 20 / 25 elsewhere), config at top of `assets/main.js`; detected by IP country (Cloudflare trace) with time-zone fallback.
+- Pre-launch: do not present the product as live (no "live" wording; pricing is "launch pricing").
 - Sections: header, hero with inbox mock, problems, use-case tabs, features, 3 steps, "same number, many places", pricing, FAQ, early access (form + WhatsApp chat CTA), footer.
 - English only. No dark mode by design.
 
@@ -19,12 +22,9 @@ GroupDesks is a shared team inbox for business WhatsApp numbers and WhatsApp gro
 - Keep text/background contrast at WCAG AA (4.5:1). White text on azure is fine; never white text on sunny.
 - No invented stats, customer logos or testimonials.
 
-## Placeholders to fill
-- `₹[PRICE]` and `[N]` in pricing
-- `[EMAIL]` in footer
-- `[+91 XXXXX XXXXX]` and `[NUMBER]` in the WhatsApp CTA (`https://wa.me/<number>`)
+## Placeholders
+All filled (WhatsApp +91 99287 94299, email info@groupdesks.com, plan limits as "Multiple users"). Privacy and Terms pages are still placeholders awaiting real text.
 
 ## Open TODOs
-- Wire the early-access form (see `TODO` in the script) to a backend or form service; it currently only shows a thank-you state.
 - Confirm product claims: "link your existing number", Android + iOS apps.
 - Possible next steps: split CSS/JS into files, add favicon + OG image from the logo, separate use-case landing pages (e.g. distributors), privacy/terms pages, analytics, deploy to groupdesks.com hosting.

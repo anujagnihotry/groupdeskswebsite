@@ -1,4 +1,7 @@
-FROM caddy:2-alpine
-COPY Caddyfile /etc/caddy/Caddyfile
-COPY index.html privacy.html terms.html /srv/
-COPY assets /srv/assets
+FROM node:22-alpine
+WORKDIR /app
+COPY package.json server.js index.html privacy.html terms.html ./
+COPY assets ./assets
+ENV NODE_ENV=production
+USER node
+CMD ["node", "server.js"]
