@@ -93,6 +93,8 @@ var PRICING={
   var err=document.getElementById('f-err');
   var ERR_DEFAULT=err.textContent;
   var submitBtn=form.querySelector('button[type="submit"]');
+  var again=document.getElementById('again');
+  if(again)again.addEventListener('click',function(){document.getElementById('thanks').hidden=true;form.hidden=false;document.getElementById('f-name').focus()});
   function fail(msg){err.textContent=msg;err.hidden=false}
   form.addEventListener('submit',function(e){
     e.preventDefault();
@@ -107,7 +109,7 @@ var PRICING={
       body:JSON.stringify({name:v('f-name'),email:v('f-email'),phone:v('f-phone'),company:v('f-company'),size:document.getElementById('f-size').value,website:v('f-hp')})
     }).then(function(r){return r.json().catch(function(){return{}}).then(function(d){return{ok:r.ok&&d.ok,status:r.status}})})
     .then(function(res){
-      if(res.ok){form.hidden=true;document.getElementById('thanks').hidden=false;return}
+      if(res.ok){form.reset();err.hidden=true;form.hidden=true;document.getElementById('thanks').hidden=false;return}
       fail(res.status===429?'Too many requests. Please try again in a while or message us on WhatsApp.':res.status===400?ERR_DEFAULT:'Something went wrong. Please try again or message us on WhatsApp.');
     })
     .catch(function(){fail('Could not send. Check your connection or message us on WhatsApp.')})
