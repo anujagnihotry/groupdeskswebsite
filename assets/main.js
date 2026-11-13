@@ -5,47 +5,36 @@ var PRICING={
   USD:{symbol:'$',locale:'en-US',starter:20,growth:25}
 };
 (function(){
-  // India is detected from the browser time zone (no IP lookup, no tracking).
-  function detect(){
+  // Currency is chosen automatically: India -> INR, everywhere else -> USD.
+  // Country comes from the visitor's IP (Cloudflare trace); the browser time zone is the fallback.
+  function fromTimeZone(){
     try{
       var tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'';
       if(tz==='Asia/Kolkata'||tz==='Asia/Calcutta')return 'INR';
     }catch(e){}
     return 'USD';
   }
-  var saved=null;
-  try{saved=localStorage.getItem('gd-currency')}catch(e){}
-  function apply(cur){
+  var done=false;
+  function show(cur){
+    if(done)return;done=true;
     var c=PRICING[cur];
     document.querySelectorAll('[data-price]').forEach(function(el){
       el.textContent=c.symbol+c[el.getAttribute('data-price')].toLocaleString(c.locale);
     });
-    document.querySelectorAll('.cur button').forEach(function(b){
-      b.setAttribute('aria-pressed',b.getAttribute('data-cur')===cur?'true':'false');
-    });
+    document.documentElement.classList.add('priced');
   }
-  document.querySelectorAll('.cur button').forEach(function(b){
-    b.addEventListener('click',function(){
-      var cur=b.getAttribute('data-cur');
-      try{localStorage.setItem('gd-currency',cur)}catch(e){}
-      apply(cur);
-    });
-  });
-  apply(PRICING[saved]?saved:detect());
-  // Refine with the visitor's IP country (Cloudflare's free trace endpoint). Skipped if the visitor chose a currency.
-  if(!PRICING[saved]&&window.fetch){
-    var ctl=window.AbortController?new AbortController():null;
-    var t=setTimeout(function(){if(ctl)ctl.abort()},2500);
-    fetch('https://www.cloudflare.com/cdn-cgi/trace',{signal:ctl?ctl.signal:undefined})
-      .then(function(r){return r.text()})
-      .then(function(txt){
-        clearTimeout(t);
-        var m=/^loc=([A-Z]{2})$/m.exec(txt);
-        var chosen=null;try{chosen=localStorage.getItem('gd-currency')}catch(e){}
-        if(m&&!PRICING[chosen])apply(m[1]==='IN'?'INR':'USD');
-      })
-      .catch(function(){});
-  }
+  try{localStorage.removeItem('gd-currency')}catch(e){}
+  if(!window.fetch){show(fromTimeZone());return}
+  var ctl=window.AbortController?new AbortController():null;
+  var timer=setTimeout(function(){if(ctl)ctl.abort();show(fromTimeZone())},2500);
+  fetch('https://www.cloudflare.com/cdn-cgi/trace',{signal:ctl?ctl.signal:undefined})
+    .then(function(r){return r.text()})
+    .then(function(txt){
+      clearTimeout(timer);
+      var m=/^loc=([A-Z]{2})$/m.exec(txt);
+      show(m?(m[1]==='IN'?'INR':'USD'):fromTimeZone());
+    })
+    .catch(function(){clearTimeout(timer);show(fromTimeZone())});
 })();
 (function(){
   var desks=[
